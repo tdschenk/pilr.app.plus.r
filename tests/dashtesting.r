@@ -15,6 +15,10 @@ params <- ""
 dash1 <- reported_taken_bar(data, params)
 dash1
 
+# Table
+dash2 <- app_plus_table(data, params)
+dash2
+
 #- on the backend, they would like a simple way to get some measures of #
 #     compliance, instead of having to manually tally all their info.
 #- could we make some dashboard panels for that?
