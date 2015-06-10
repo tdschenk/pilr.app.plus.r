@@ -1,0 +1,10 @@
+Package: pilr.app.plus.r
+Type: Package
+Title: Dashboards for use with APP+ data on PiLR
+Version: 0.1
+Date: 2015-06-02
+Author: Tyler Schenk (tschenk@meinergy.com)
+Description: Dashboards for use with APP+ data on PiLR
+License: MEI Research, Ltd.
+LazyData: TRUE
+Depends: pilr.api.r, httr, jsonlite, plyr, dplyr, htmlTable, ggvis
