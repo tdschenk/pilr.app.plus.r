@@ -4,11 +4,10 @@ options(pilr_project_default = "horvath_testing_3")
 options(pilr_default_access_code = "be1eceb7-353e-44bf-9a16-4c08d44eced8")
 
 # Grab data
-survey_data <- read_pilr(data_set = "pilrhealth:mobile:survey_data", schema = "1",
-                         query_params = list(participant = "904"))
-dosage_schedule <- read_pilr(data_set = "pilrhealth:app_plus:dosage_schedule", schema = "1",
-                             query_params = list(participant = "904"))
-data <- list(survey = survey_data, dosages = dosage_schedule)
+data <- list(survey = read_pilr(data_set = "pilrhealth:mobile:survey_data", schema = "1",
+                                query_params = list(participant = "904")),
+             dosage = read_pilr(data_set = "pilrhealth:app_plus:dosage_schedule", schema = "1",
+                                query_params = list(participant = "904")))
 params <- ""
 
 # Bar chart reported/taken/80% compliance

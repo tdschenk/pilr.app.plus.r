@@ -7,4 +7,4 @@ Author: Tyler Schenk (tschenk@meinergy.com)
 Description: Dashboards for use with APP+ data on PiLR
 License: MEI Research, Ltd.
 LazyData: TRUE
-Depends: pilr.api.r, httr, jsonlite, plyr, dplyr, htmlTable, ggvis
+Depends: pilr.api.r, httr, jsonlite, plyr, dplyr, xtable, ggvis
