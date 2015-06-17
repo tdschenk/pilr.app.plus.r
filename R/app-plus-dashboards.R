@@ -7,8 +7,8 @@ reported_taken_bar <- function(data, params, ...) {
   dosage <- data$dosage
   survey <- data$survey
   # Add weekday to dataframe
-  survey$metadata.local_time <- as.POSIXlt(survey$metadata.local_time, format = "%Y-%m-%dT%H:%M:%SZ")
-  survey$data.week <- format(survey$metadata.local_time, format = "%W")
+  survey$metadata$local_time <- as.POSIXlt(survey$metadata$local_time, format = "%Y-%m-%dT%H:%M:%SZ")
+  survey$data$week <- format(survey$metadata$local_time, format = "%W")
   # Unlist columns
   dosage <- as.data.frame(t(apply(dosage, 1, unlist)))
   # Remove empty dosage_id rows
