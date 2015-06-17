@@ -4,7 +4,7 @@
 # REQUIRES XTS
 #' @export
 reported_taken_bar <- function(data, params, ...) {
-  stop(colnames(data$survey))
+  stop(names(data))
   # Add weekday to dataframe
   data$survey.metadata.local_time <- as.POSIXlt(data$survey.metadata.local_time, format = "%Y-%m-%dT%H:%M:%SZ")
   data$survey.data.week <- format(data$survey.metadata.local_time, format = "%W")
