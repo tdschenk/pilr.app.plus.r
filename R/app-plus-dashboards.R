@@ -6,10 +6,12 @@
 reported_taken_bar <- function(data, params, ...) {
   dosage <- data$dosage
   survey <- data$survey
-  stop(paste0("dosage:",nrow(dosage),"  dosagedata:",nrow(dosage$data),"  survey:",nrow(survey),"  surveydata:",nrow(survey$data)))
   # Add weekday to dataframe
   survey$metadata$local_time <- as.POSIXlt(survey$metadata$local_time, format = "%Y-%m-%dT%H:%M:%SZ")
+  survey$data$id <- survey$metadata$id
   survey$data$week <- format(survey$metadata$local_time, format = "%W")
+  survey$data <- subset(survey$data, !duplicated(survey$data$id))
+  stop(paste0(nrow(survey$data)))
   # Remove empty dosage_id rows
   dosage <- dosage$data[dosage$data$dosage_id != "", ]
   # Find total expected dosages
@@ -29,14 +31,12 @@ reported_taken_bar <- function(data, params, ...) {
                         percent  = numeric(),
                         category = numeric())
   survey$data$local_time <- survey$metadata$local_time
-  stop(paste0("nrow:", nrow(survey$data), "   lengthall:", length(survey$data), "   lengthvar:", length(survey$data$week)))
   for (i in 1:length(unique(survey$data$week))) {
     survey_reported <- survey$data[survey$data$week == unique(survey$data$week)[i], ]
     prevmonday <- 7 * floor(as.numeric(as.Date(survey_reported$local_time[1])-1+4) / 7) + as.Date(1-4, origin = "1970-01-01") 
     rep_percent <- nrow(survey_reported)/expected_doses
     survey_taken <- survey_reported[survey_reported$response_value == 1, ]
     taken_percent <- nrow(survey_taken)/expected_doses
-    stop(paste0("Reported:", nrow(survey_reported), "   Taken:", nrow(survey_taken), "   Expected:", expected_doses))
     summary <- rbind(summary, data.frame(week_start = prevmonday,
                                          percent = rep_percent,
                                          category = "reported"))
