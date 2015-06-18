@@ -6,6 +6,7 @@
 reported_taken_bar <- function(data, params, ...) {
   dosage <- data$dosage
   survey <- data$survey
+  stop(paste0("dosage:",nrow(dosage),"  dosagedata:",nrow(dosage$data),"  survey:",nrow(survey),"  surveydata:",nrow(survey$data)))
   # Add weekday to dataframe
   survey$metadata$local_time <- as.POSIXlt(survey$metadata$local_time, format = "%Y-%m-%dT%H:%M:%SZ")
   survey$data$week <- format(survey$metadata$local_time, format = "%W")
