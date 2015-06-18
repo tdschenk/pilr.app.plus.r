@@ -17,9 +17,9 @@ reported_taken_bar <- function(data, params, ...) {
   dosage_final <- data.frame(dosage_id = character())
   for (i in 1:length(unique(dosage$data$dosage_id))) {
     dosage_subset <- dosage[dosage$data$dosage_id == 
-                              as.character(unique(dosage$data.dosage_id))[i], ]
-    if (as.character(dosage_subset$data.action[nrow(dosage_subset)]) == "EDIT" |
-        as.character(dosage_subset$data.action[nrow(dosage_subset)]) == "CREATE")
+                              as.character(unique(dosage$data$dosage_id))[i], ]
+    if (as.character(dosage_subset$data$action[nrow(dosage_subset)]) == "EDIT" |
+        as.character(dosage_subset$data$action[nrow(dosage_subset)]) == "CREATE")
       dosage_final <- rbind(dosage_final, 
                             data.frame(dosage_id = as.character(unique(dosage$data$dosage_id))[i]))
   }
