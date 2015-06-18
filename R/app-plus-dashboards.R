@@ -45,7 +45,7 @@ reported_taken_bar <- function(data, params, ...) {
   }
   summary$week_start <- substr(as.character(summary$week_start), 6, 
                                nchar(as.character(summary$week_start)))
-  
+  stop(paste0(summary$percent))
   # Bar chart 
   summary %>%
     ggvis(x = ~week_start, y = ~percent, fill = ~category) %>%
