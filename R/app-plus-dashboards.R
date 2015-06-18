@@ -18,6 +18,7 @@ reported_taken_bar <- function(data, params, ...) {
   for (i in 1:length(unique(dosage$data$dosage_id))) {
     dosage_subset <- dosage$data[dosage$data$dosage_id == 
                               unique(dosage$data$dosage_id)[i], ]
+    stop(paste0(dosage_subset))
     if (as.character(dosage_subset$action[nrow(dosage_subset)]) == "EDIT" |
         as.character(dosage_subset$action[nrow(dosage_subset)]) == "CREATE")
       dosage_final <- rbind(dosage_final, 
