@@ -28,6 +28,7 @@ reported_taken_bar <- function(data, params, ...) {
                         percent  = numeric(),
                         category = numeric())
   survey$data$local_time <- survey$metadata$local_time
+  stop(paste0("nrow:", nrow(survey$data), "   lengthall:", length(survey$data), "   lengthvar:", length(survey$data$week)))
   for (i in 1:length(unique(survey$data$week))) {
     survey_reported <- survey$data[survey$data$week == unique(survey$data$week)[i], ]
     prevmonday <- 7 * floor(as.numeric(as.Date(survey_reported$local_time[1])-1+4) / 7) + as.Date(1-4, origin = "1970-01-01") 
