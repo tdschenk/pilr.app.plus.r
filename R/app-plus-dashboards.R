@@ -15,13 +15,13 @@ reported_taken_bar <- function(data, params, ...) {
   dosage <- dosage[dosage$data.dosage_id != "", ]
   # Find total expected dosages
   dosage_final <- data.frame(dosage_id = character())
-  for (i in 1:length(unique(dosage$data.dosage_id))) {
-    dosage_subset <- dosage[dosage$data.dosage_id == 
+  for (i in 1:length(unique(dosage$data$dosage_id))) {
+    dosage_subset <- dosage[dosage$data$dosage_id == 
                               as.character(unique(dosage$data.dosage_id))[i], ]
     if (as.character(dosage_subset$data.action[nrow(dosage_subset)]) == "EDIT" |
         as.character(dosage_subset$data.action[nrow(dosage_subset)]) == "CREATE")
       dosage_final <- rbind(dosage_final, 
-                            data.frame(dosage_id = as.character(unique(dosage$data.dosage_id))[i]))
+                            data.frame(dosage_id = as.character(unique(dosage$data$dosage_id))[i]))
   }
   # Expected doses per week
   expected_doses <- 7*nrow(dosage_final)
@@ -29,9 +29,9 @@ reported_taken_bar <- function(data, params, ...) {
   summary <- data.frame(week_start = character(),
                         percent  = numeric(),
                         category = numeric())
-  for (i in 1:length(unique(survey$data.week))) {
-    survey_reported <- survey[survey$data.week == unique(survey$data.week)[i], ]
-    prevmonday <- 7 * floor(as.numeric(as.Date(survey_reported$metadata.local_time[1])-1+4) / 7) + as.Date(1-4, origin = "1970-01-01") 
+  for (i in 1:length(unique(survey$data$week))) {
+    survey_reported <- survey[survey$data$week == unique(survey$data$week)[i], ]
+    prevmonday <- 7 * floor(as.numeric(as.Date(survey_reported$metadata$local_time[1])-1+4) / 7) + as.Date(1-4, origin = "1970-01-01") 
     rep_percent <- nrow(survey_reported)/expected_doses
     survey_taken <- survey_reported[survey_reported$response_value == 1, ]
     taken_percent <- nrow(survey_taken)/expected_doses
