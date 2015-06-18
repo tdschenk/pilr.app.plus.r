@@ -10,8 +10,8 @@ reported_taken_bar <- function(data, params, ...) {
   survey$metadata$local_time <- as.POSIXlt(survey$metadata$local_time, format = "%Y-%m-%dT%H:%M:%SZ")
   survey$data$id <- survey$metadata$id
   survey$data$week <- format(survey$metadata$local_time, format = "%W")
-  survey$data <- subset(survey$data, !duplicated(survey$data$id))
-  stop(paste0(nrow(survey$data)))
+  #survey$data <- subset(survey$data, !duplicated(survey$data$id))
+  stop(paste0(nrow(subset(survey$data, !duplicated(survey$data$id)))))
   # Remove empty dosage_id rows
   dosage <- dosage$data[dosage$data$dosage_id != "", ]
   # Find total expected dosages
