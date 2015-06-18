@@ -36,6 +36,7 @@ reported_taken_bar <- function(data, params, ...) {
     rep_percent <- nrow(survey_reported)/expected_doses
     survey_taken <- survey_reported[survey_reported$response_value == 1, ]
     taken_percent <- nrow(survey_taken)/expected_doses
+    stop(paste0("Reported:", nrow(survey_reported), "   Taken:", nrow(survey_taken), "   Expected:", expected_doses))
     summary <- rbind(summary, data.frame(week_start = prevmonday,
                                          percent = rep_percent,
                                          category = "reported"))
@@ -45,7 +46,6 @@ reported_taken_bar <- function(data, params, ...) {
   }
   summary$week_start <- substr(as.character(summary$week_start), 6, 
                                nchar(as.character(summary$week_start)))
-  stop(paste0(summary$percent))
   # Bar chart 
   summary %>%
     ggvis(x = ~week_start, y = ~percent, fill = ~category) %>%
