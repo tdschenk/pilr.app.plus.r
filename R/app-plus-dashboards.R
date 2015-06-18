@@ -12,17 +12,16 @@ reported_taken_bar <- function(data, params, ...) {
   # Unlist columns
   #dosage <- as.data.frame(t(apply(dosage, 1, unlist)))
   # Remove empty dosage_id rows
-  dosage <- dosage[dosage$data.dosage_id != "", ]
+  dosage <- dosage$data[dosage$data$dosage_id != "", ]
   # Find total expected dosages
   dosage_final <- data.frame(dosage_id = character())
-  for (i in 1:length(unique(dosage$data$dosage_id))) {
-    dosage_subset <- dosage$data[dosage$data$dosage_id == 
-                              unique(dosage$data$dosage_id)[i], ]
-    stop(paste0(dosage_subset))
+  for (i in 1:length(unique(dosage$dosage_id))) {
+    dosage_subset <- dosage[dosage$dosage_id == 
+                              unique(dosage$dosage_id)[i], ]
     if (as.character(dosage_subset$action[nrow(dosage_subset)]) == "EDIT" |
         as.character(dosage_subset$action[nrow(dosage_subset)]) == "CREATE")
       dosage_final <- rbind(dosage_final, 
-                            data.frame(dosage_id = as.character(unique(dosage$data$dosage_id))[i]))
+                            data.frame(dosage_id = as.character(unique(dosage$dosage_id))[i]))
   }
   # Expected doses per week
   expected_doses <- 7*nrow(dosage_final)
@@ -30,9 +29,10 @@ reported_taken_bar <- function(data, params, ...) {
   summary <- data.frame(week_start = character(),
                         percent  = numeric(),
                         category = numeric())
+  survey$data$local_time <- survey$metadata$local_time
   for (i in 1:length(unique(survey$data$week))) {
-    survey_reported <- survey[survey$data$week == unique(survey$data$week)[i], ]
-    prevmonday <- 7 * floor(as.numeric(as.Date(survey_reported$metadata$local_time[1])-1+4) / 7) + as.Date(1-4, origin = "1970-01-01") 
+    survey_reported <- survey$data[survey$data$week == unique(survey$data$week)[i], ]
+    prevmonday <- 7 * floor(as.numeric(as.Date(survey_reported$local_time[1])-1+4) / 7) + as.Date(1-4, origin = "1970-01-01") 
     rep_percent <- nrow(survey_reported)/expected_doses
     survey_taken <- survey_reported[survey_reported$response_value == 1, ]
     taken_percent <- nrow(survey_taken)/expected_doses
