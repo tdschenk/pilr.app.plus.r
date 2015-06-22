@@ -51,7 +51,7 @@ reported_taken_bar <- function(data, params, ...) {
     add_axis('x', title = 'Week Start') %>%
     add_axis('y', title = 'Percent') %>%
     add_axis('y', title = 'Percent', orient = 'right') %>%
-    add_axis("x", orient = "top", ticks = 0, title = paste0("Participant: ", paste(unique(data$survey.metadata.pt),collapse=",")),
+    add_axis("x", orient = "top", ticks = 0, title = paste0("Participant: ", paste(unique(data$survey$metadata$pt),collapse=",")),
              properties = axis_props(
                axis = list(stroke = "white"),
                labels = list(fontSize = 0)))
